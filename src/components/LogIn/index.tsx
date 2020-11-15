@@ -44,7 +44,7 @@ const LogIn = () => {
     }
 
     return (
-        <CustomGrid height="100vh" width="100vw" container spacing={1}>
+        <CustomGrid height="90vh" width="95vw" container spacing={1}>
             <> {logIn && <CustomForm width="600px" onSubmit={handleSubmit(onLogin)}>
                 <TextField
                     autoComplete="email"
@@ -139,7 +139,7 @@ const LogIn = () => {
                     variant="contained"
                     color="primary"
                 >
-                    Log In
+                    Sign Up
                     </Button>
                 <CustomGrid item width="auto">
                     <Link onClick={handleLoginStatus} variant="body2">
