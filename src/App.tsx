@@ -1,13 +1,16 @@
 import "./App.css";
 import React from "react";
 import theme from "./theme/theme";
+import Routes from "./components";
+import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
-import Login from "./components/login/Login";
 
 const App = () => {
   return (
     <ThemeProvider theme={theme}>
-      <Login />
+      <BrowserRouter>
+        <Routes />
+      </BrowserRouter>
     </ThemeProvider>
   );
 };
