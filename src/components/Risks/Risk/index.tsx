@@ -26,8 +26,6 @@ const MediaCard = ({
 
   const onClose = () => setOpenDialog(false);
 
-  console.log(body);
-
   return (
     <>
       <CustomCard>

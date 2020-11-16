@@ -2,6 +2,7 @@ import Drawer from "@material-ui/core/Drawer";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
+import FormatListBulletedIcon from "@material-ui/icons/FormatListBulleted";
 import ListItemText from "@material-ui/core/ListItemText";
 import React from "react";
 import clsx from "clsx";
@@ -31,9 +32,9 @@ const SideBar = (props: any) => {
     },
     {
       name: "Riesgos",
-      icon: <CreditCard />,
+      icon: <FormatListBulletedIcon />,
       to: "/risks",
-    }
+    },
   ];
 
   const list = () => (
