@@ -29,6 +29,11 @@ const SideBar = (props: any) => {
       icon: <CreditCard />,
       to: "/jeje",
     },
+    {
+      name: "Riesgos",
+      icon: <CreditCard />,
+      to: "/riesgos",
+    }
   ];
 
   const list = () => (

@@ -1,5 +1,5 @@
 export const getToken = () => {
-  const session = localStorage.getItem("softwareAPI");
+  const session = localStorage.getItem("userInfoSotware");
   if (session) {
     return JSON.parse(session);
   }

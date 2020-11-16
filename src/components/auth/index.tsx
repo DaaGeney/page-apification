@@ -1,11 +1,12 @@
 import Alert from "../Alert";
 import Button from "@material-ui/core/Button";
 import Link from "@material-ui/core/Link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TextField from "@material-ui/core/TextField";
 import { logInCompany, registerCompany } from "../../api/auth";
 import { CustomGrid, CustomForm } from "./styles";
 import { useForm } from "react-hook-form";
+import { getToken } from "../../utils/helpers";
 
 type Inputs = {
   email?: string;
@@ -22,11 +23,16 @@ const LogIn = (props: any) => {
   const [snackMessage, setSnackMessage] = useState("");
   const [typeSnack, setTypeSnack] = useState("");
 
+  useEffect(() => {
+    if (getToken()) {
+      props.history.push("/");
+    }
+  }, []);
+
   const onLogin = (data: Inputs) => {
     logInCompany(data.email, data.password)
       .then((res) => res.json())
       .then((result) => {
-        console.log(result)
         if (result.status) {
           localStorage.setItem(
             "userInfoSotware",
@@ -35,7 +41,7 @@ const LogIn = (props: any) => {
               token: result.token,
             })
           );
-          props.history.push(`/`);
+          props.history.push("/");
         } else {
           setSnackMessage(result.message);
           setTypeSnack("error");
@@ -77,7 +83,7 @@ const LogIn = (props: any) => {
   };
 
   return (
-    <CustomGrid height="100vh" width="100vw" container spacing={1}>
+    <CustomGrid height="70vh" width="100vw" container spacing={1}>
       {logIn && (
         <CustomForm width="600px" onSubmit={handleSubmit(onLogin)}>
           <TextField

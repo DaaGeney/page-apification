@@ -1,14 +1,16 @@
-import React from "react";
-import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import AccountCircle from "@material-ui/icons/AccountCircle";
 import AppBar from "@material-ui/core/AppBar";
+import IconButton from "@material-ui/core/IconButton";
+import Menu from "@material-ui/core/Menu";
+import MenuIcon from "@material-ui/icons/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+import React, { useState, useEffect } from "react";
+import SideBar from "./SideBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
-import AccountCircle from "@material-ui/icons/AccountCircle";
-import MenuItem from "@material-ui/core/MenuItem";
-import Menu from "@material-ui/core/Menu";
-import SideBar from "./../SideBar"
+import { CustomButton } from "./styles";
+import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import { getToken } from "../../utils/helpers";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -24,12 +26,20 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function MenuAppBar() {
+const MenuAppBar = (props: any) => {
   const classes = useStyles();
-  const [auth, setAuth] = React.useState(true);
-  const [sidebar, setSidebar] = React.useState(false);
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [auth, setAuth] = useState(false);
+  const [sidebar, setSidebar] = useState(false);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
+
+  useEffect(() => {
+    if (getToken()) {
+      setAuth(true);
+    } else {
+      setAuth(false);
+    }
+  }, []);
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -37,32 +47,32 @@ export default function MenuAppBar() {
 
   const handleClose = () => {
     setAnchorEl(null);
+    localStorage.removeItem("userInfoSotware");
+    setAuth(false);
   };
+
+  const onLogin = () => props.history.push("/logIn");
 
   return (
     <div className={classes.root}>
-      {/* <FormGroup>
-        <FormControlLabel
-          control={<Switch checked={auth} onChange={handleChange} aria-label="login switch" />}
-          label={auth ? 'Logout' : 'Login'}
-        />
-      </FormGroup> */}
       <AppBar position="static">
         <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="menu"
-            onClick={()=>setSidebar(true)}
-          >
-            <MenuIcon />
-          </IconButton>
+          {auth && (
+            <IconButton
+              edge="start"
+              className={classes.menuButton}
+              color="inherit"
+              aria-label="menu"
+              onClick={() => setSidebar(true)}
+            >
+              <MenuIcon />
+            </IconButton>
+          )}
           <Typography variant="h6" className={classes.title}>
-            Photos
+            Measure your risks
           </Typography>
           {auth && (
-            <div>
+            <>
               <IconButton
                 aria-label="account of current user"
                 aria-controls="menu-appbar"
@@ -87,14 +97,20 @@ export default function MenuAppBar() {
                 open={open}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
+                <MenuItem onClick={handleClose}>Sign out</MenuItem>
               </Menu>
-              <SideBar open={sidebar} onClose={() => setSidebar(false)}/>
-            </div>
+              <SideBar
+                {...props}
+                open={sidebar}
+                onClose={() => setSidebar(false)}
+              />
+            </>
           )}
+          {!auth && <CustomButton onClick={onLogin}>LogIn</CustomButton>}
         </Toolbar>
       </AppBar>
     </div>
   );
-}
+};
+
+export default MenuAppBar;
