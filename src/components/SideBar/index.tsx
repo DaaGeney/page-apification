@@ -35,7 +35,7 @@ const SideBar = (props: any) => {
     <div className={clsx(classes.list)} role="presentation">
       <List>
         {routes.map((e, index) => (
-          <ListItem button key={index} >
+          <ListItem button key={index} onClick={() => props.history.push(e.to)}>
             <ListItemIcon>{e.icon}</ListItemIcon>
             <ListItemText primary={e.name} />
           </ListItem>
@@ -44,11 +44,11 @@ const SideBar = (props: any) => {
     </div>
   );
   return (
-    <React.Fragment>
+    <>
       <Drawer anchor={"left"} open={props.open} onClose={props.onClose}>
         {list()}
       </Drawer>
-    </React.Fragment>
+    </>
   );
 };
 

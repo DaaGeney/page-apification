@@ -26,6 +26,7 @@ const LogIn = (props: any) => {
     logInCompany(data.email, data.password)
       .then((res) => res.json())
       .then((result) => {
+        console.log(result)
         if (result.status) {
           localStorage.setItem(
             "userInfoSotware",
