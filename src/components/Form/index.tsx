@@ -8,6 +8,7 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { CustomForm } from "./styles";
 import { useForm } from "react-hook-form";
+import { registerRisk } from "../../api/riesgoCredito";
 
 type Inputs = {
   impacto?: string;
@@ -15,14 +16,27 @@ type Inputs = {
   ead?: string;
   lgd?: string;
   pd?: string;
+  id?: string;
 };
 
 export default function FormDialog(props: any) {
   const { register, handleSubmit, errors, reset } = useForm<Inputs>();
 
   const onSave = (data: Inputs) => {
-    console.log(data)
-    reset()
+    registerRisk(
+      data.id,
+      data.pd,
+      data.lgd,
+      data.ead,
+      data.probabilidad,
+      data.impacto
+    )
+      .then((res) => res.json())
+      .then((result) => {
+        props.messageAlert("Registro exitoso");
+        props.activeAlert();
+      });
+    reset();
   };
 
   return (

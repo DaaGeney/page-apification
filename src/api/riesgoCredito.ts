@@ -17,3 +17,15 @@ export const registerRisk = (
   };
   return fetch(`${url}/riesgoCredito/${id}`, jsonRegister);
 };
+
+export const getMap = (
+  id?:string
+) => {
+const jsonRegister = {
+  method: "GET",
+  headers: {
+    "Content-Type": "application/json",
+  },
+};
+return fetch(`${url}/riesgoCredito/${id}/mapa`, jsonRegister);
+};
