@@ -32,7 +32,7 @@ const SideBar = (props: any) => {
     {
       name: "Riesgos",
       icon: <CreditCard />,
-      to: "/riesgos",
+      to: "/risks",
     }
   ];
 

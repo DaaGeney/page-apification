@@ -82,8 +82,8 @@ const Risks = () => {
       {risks.length > 0 ? (
         risks.map((e) => (
           <CustomCard
-            title={e.name}
-            paragraph={e.description}
+            body={e}
+            key={e._id}
             onDeleteElement={() => onDeleteElement(e._id)}
             onEditElement={() => onEditElement(e)}
           />
