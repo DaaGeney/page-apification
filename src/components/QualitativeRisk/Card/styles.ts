@@ -4,7 +4,7 @@ import Card from "@material-ui/core/Card";
 export const CustomCard = styled(Card)`
   && {
     margin: auto;
-    width: 60%;
+    width: 800px;
     margin-bottom: 20px;
   }
   & .MuiCardActions-root {

@@ -18,7 +18,7 @@ export default function Map(props: any) {
       .then((res) => res.json())
       .then((result) => {
         setReport(result.data.nombre);
-        setPerdida(result.data.perdidaEsperada)
+        setPerdida(result.data.perdidaEsperada);
       });
   }, []);
 

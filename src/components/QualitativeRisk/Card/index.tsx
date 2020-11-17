@@ -1,7 +1,7 @@
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
-import { Public } from "@material-ui/icons";
+import { Public, Assessment } from "@material-ui/icons";
 import IconButton from "@material-ui/core/IconButton";
 import React, { useState } from "react";
 import Typography from "@material-ui/core/Typography";
@@ -40,7 +40,7 @@ const MediaCard = ({ body }: MediaCardProps) => {
             <Public />
           </IconButton>
           <IconButton size="small" color="primary" onClick={onOpenReport}>
-            <Public />
+            <Assessment />
           </IconButton>
         </CardActions>
       </CustomCard>

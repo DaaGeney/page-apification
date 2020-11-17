@@ -6,3 +6,8 @@ export const CustomButton = styled(Button)`
     color: white;
   }
 `;
+
+export const CustomForm = styled.div<{
+}>`
+  flex-grow: 1,
+`;

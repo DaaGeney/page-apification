@@ -3,7 +3,7 @@ import Form from "./Form";
 import Alert from "../Alert";
 import { CustomGrid, CustomButton } from "./styles";
 import { getAllRisks } from "./../../api/riesgoCredito";
-import  MediaCard from "./Card"
+import MediaCard from "./Card";
 
 export default function Riesgo() {
   const [open, setOpen] = React.useState(false);
@@ -51,15 +51,8 @@ export default function Riesgo() {
         {snackMessage}
       </Alert>
       <CustomButton onClick={() => setOpen(true)}>CREAR RIESGO</CustomButton>
-      {console.log(risks)}
-      {
-      risks.length > 0 ? (
-        risks.map((e) => (
-          <MediaCard
-            body={e}
-            key={e._id}
-          />
-        ))
+      {risks.length > 0 ? (
+        risks.map((e) => <MediaCard body={e} key={e._id} />)
       ) : (
         <p>No hay riesgos disponibles.</p>
       )}

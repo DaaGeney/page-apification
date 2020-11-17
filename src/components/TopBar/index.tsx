@@ -9,25 +9,9 @@ import SideBar from "./SideBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { CustomButton } from "./styles";
-import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { getToken } from "../../utils/helpers";
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      flexGrow: 1,
-    },
-    menuButton: {
-      marginRight: theme.spacing(2),
-    },
-    title: {
-      flexGrow: 1,
-    },
-  })
-);
-
 const MenuAppBar = (props: any) => {
-  const classes = useStyles();
   const [auth, setAuth] = useState(false);
   const [sidebar, setSidebar] = useState(false);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -54,13 +38,12 @@ const MenuAppBar = (props: any) => {
   const onLogin = () => props.history.push("/logIn");
 
   return (
-    <div className={classes.root}>
+    <div >
       <AppBar position="static">
         <Toolbar>
           {auth && (
             <IconButton
               edge="start"
-              className={classes.menuButton}
               color="inherit"
               aria-label="menu"
               onClick={() => setSidebar(true)}
@@ -68,7 +51,7 @@ const MenuAppBar = (props: any) => {
               <MenuIcon />
             </IconButton>
           )}
-          <Typography variant="h6" className={classes.title}>
+          <Typography variant="h6">
             Measure your risks
           </Typography>
           {auth && (
