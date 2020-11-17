@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Card from "@material-ui/core/Card";
-import Grid from "@material-ui/core/Grid";
+import Button from "@material-ui/core/Button";
+
 
 export const CustomGrid = styled.div<{
   color?: string;
@@ -34,3 +35,12 @@ export const CustomCard = styled(Card)<{
     margin: 10px;
   }
 `;
+
+export const CustomButton = styled(Button)`
+  && {
+    color: white;
+    background-color: #3f51b5;
+    margin-bottom: 10px;
+  }
+`;
+
