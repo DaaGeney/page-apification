@@ -6,7 +6,7 @@ import FormatListBulletedIcon from "@material-ui/icons/FormatListBulleted";
 import ListItemText from "@material-ui/core/ListItemText";
 import React from "react";
 import clsx from "clsx";
-import { AttachMoney, CreditCard } from "@material-ui/icons";
+import { AttachMoney, CreditCard, Money } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
@@ -20,6 +20,11 @@ const SideBar = (props: any) => {
   const [state, setState] = React.useState(false);
 
   const routes = [
+    {
+      name: "Pérdida esperada",
+      icon: <Money />,
+      to: "/expectedLost",
+    },
     {
       name: "Qualitative Risk",
       icon: <AttachMoney />,

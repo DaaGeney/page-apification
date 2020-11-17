@@ -1,5 +1,6 @@
 import React from "react";
 import LogIn from "./Auth";
+import ExpectedLost from "./ExpectedLost";
 import Riesgo from "./QualitativeRisk";
 import Risks from "./Risks";
 import TopBar from "./TopBar";
@@ -16,6 +17,7 @@ const Routes = () => (
       <Route exact path="/logIn" component={LogIn} />
       <Route exact path="/QualitativeRisk" component={Riesgo} />
       <Route exact path="/risks" component={Risks} />
+      <Route exact path="/expectedLost" component={ExpectedLost} />
     </Switch>
   </>
 );

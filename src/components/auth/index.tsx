@@ -42,6 +42,7 @@ const LogIn = (props: any) => {
             })
           );
           props.history.push("/");
+          window.location.reload();
         } else {
           setSnackMessage(result.message);
           setTypeSnack("error");
