@@ -23,7 +23,7 @@ const SideBar = (props: any) => {
     {
       name: "Perdida esperada",
       icon: <AttachMoney />,
-      to: "/holis",
+      to: "/expectedLost",
     },
     {
       name: "Riesgo crediticio",
