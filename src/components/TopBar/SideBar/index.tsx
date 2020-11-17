@@ -21,14 +21,9 @@ const SideBar = (props: any) => {
 
   const routes = [
     {
-      name: "Perdida esperada",
+      name: "Qualitative Risk",
       icon: <AttachMoney />,
-      to: "/holis",
-    },
-    {
-      name: "Riesgo crediticio",
-      icon: <CreditCard />,
-      to: "/jeje",
+      to: "/QualitativeRisk",
     },
     {
       name: "Riesgos",

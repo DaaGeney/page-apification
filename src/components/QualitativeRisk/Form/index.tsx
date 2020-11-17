@@ -8,14 +8,14 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { CustomForm } from "./styles";
 import { useForm } from "react-hook-form";
-import { registerRisk } from "../../api/riesgoCredito";
+import { registerRisk } from "../../../api/riesgoCredito";
 
 type Inputs = {
   impacto?: string;
   probabilidad?: string;
-  ead?: string;
-  lgd?: string;
-  pd?: string;
+  EAD?: string;
+  PD?: string;
+  LGD?: string;
   id?: string;
 };
 
@@ -25,18 +25,25 @@ export default function FormDialog(props: any) {
   const onSave = (data: Inputs) => {
     registerRisk(
       data.id,
-      data.pd,
-      data.lgd,
-      data.ead,
+      data.PD,
+      data.LGD,
+      data.EAD,
       data.probabilidad,
       data.impacto
     )
       .then((res) => res.json())
-      .then((result) => {
-        props.messageAlert("Registro exitoso");
-        props.activeAlert();
+      .then((result) =>  {
+        if (result.status) {
+          props.typeSnack("success")
+          props.messageAlert(result.message)
+          props.activeAlert()
+          reset();
+        } else {
+          props.typeSnack("error")
+          props.messageAlert(result.message)
+          props.activeAlert()
+        }
       });
-    reset();
   };
 
   return (
@@ -55,12 +62,23 @@ export default function FormDialog(props: any) {
             </DialogContentText>
             <TextField
               fullWidth
+              label="Nombre"
+              margin="normal"
+              name="id"
+              helperText={errors.id ? "This field is required" : ""}
+              inputRef={register({ required: true })}
+              error={Boolean(errors.id)}
+              type="text"
+              variant="outlined"
+            />
+            <TextField
+              fullWidth
               label="Probabilidad de incumplimiento"
               margin="normal"
-              name="pd"
-              helperText={errors.pd ? "This field is required" : ""}
+              name="PD"
+              helperText={errors.PD ? "This field is required" : ""}
               inputRef={register({ required: true })}
-              error={Boolean(errors.pd)}
+              error={Boolean(errors.PD)}
               type="number"
               variant="outlined"
             />
@@ -68,10 +86,10 @@ export default function FormDialog(props: any) {
               fullWidth
               label="Ratio de pérdida"
               margin="normal"
-              name="lgd"
-              helperText={errors.lgd ? "This field is required" : ""}
+              name="LGD"
+              helperText={errors.LGD ? "This field is required" : ""}
               inputRef={register({ required: true })}
-              error={Boolean(errors.lgd)}
+              error={Boolean(errors.LGD)}
               type="number"
               variant="outlined"
             />
@@ -79,10 +97,10 @@ export default function FormDialog(props: any) {
               fullWidth
               label="Tamaño deuda"
               margin="normal"
-              name="ead"
-              helperText={errors.ead ? "This field is required" : ""}
+              name="EAD"
+              helperText={errors.EAD ? "This field is required" : ""}
               inputRef={register({ required: true })}
-              error={Boolean(errors.ead)}
+              error={Boolean(errors.EAD)}
               type="number"
               variant="outlined"
             />

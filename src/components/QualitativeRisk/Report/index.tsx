@@ -7,15 +7,19 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { CustomForm } from "./styles";
-import { getMap } from "../../api/riesgoCredito";
+import { getReport } from "../../../api/riesgoCredito";
 
 export default function Map(props: any) {
-  const [map, setMap] = React.useState("");
+  const [report, setReport] = React.useState("");
+  const [perdida, setPerdida] = React.useState("");
 
   React.useEffect(() => {
-    getMap(props.id)
+    getReport(props.id)
       .then((res) => res.json())
-      .then((result) => setMap(result.data));
+      .then((result) => {
+        setReport(result.data.nombre);
+        setPerdida(result.data.perdidaEsperada)
+      });
   }, []);
 
   return (
@@ -26,17 +30,26 @@ export default function Map(props: any) {
         aria-labelledby="form-dialog-title"
       >
         <CustomForm>
-          <DialogTitle id="form-dialog-title">MAPA</DialogTitle>
+          <DialogTitle id="form-dialog-title">REPORTE</DialogTitle>
           <DialogContent>
             <DialogContentText>
-              Segun los parametros previamente definidos se obtiene:
+              El reporte encontrado para la empresa seleccionada es:
             </DialogContentText>
             <TextField
               fullWidth
-              label="mapa"
+              label="Compañia"
               margin="normal"
-              name="mapa"
-              value={map}
+              name="compania"
+              value={report}
+              type="text"
+              variant="outlined"
+            />
+            <TextField
+              fullWidth
+              label="Perdida Esperada"
+              margin="normal"
+              name="PE"
+              value={perdida}
               type="text"
               variant="outlined"
             />
