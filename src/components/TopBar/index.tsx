@@ -33,7 +33,6 @@ const MenuAppBar = (props: any) => {
     setAnchorEl(null);
     localStorage.removeItem("userInfoSotware");
     setAuth(false);
-    props.history.push("/logIn");
   };
 
   const onLogin = () => props.history.push("/logIn");

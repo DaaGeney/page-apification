@@ -6,6 +6,7 @@ export const CustomCard = styled(Card)`
     margin: auto;
     width: 800px;
     margin-bottom: 20px;
+    align-items: center;
   }
   & .MuiCardActions-root {
     flex-direction: row-reverse;

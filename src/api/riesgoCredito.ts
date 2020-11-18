@@ -1,16 +1,18 @@
 import { url } from "../utils/global";
 
 export const registerRisk = (
-    id?:string,
-    PD?: string,
-    EAD?: string,
-    LGD?: string,
-    probabilidad?: string,
-    impacto?: string
+    name?:string,
+    PD?: number,
+    EAD?: number,
+    LGD?: number,
+    probabilidad?: number,
+    impacto?: number,
+    id?: string
+
 ) => {  
   const jsonRegister = {
     method: "POST",
-    body: JSON.stringify({ PD, EAD, LGD, probabilidad, impacto }),
+    body: JSON.stringify({name, PD, EAD, LGD, probabilidad, impacto }),
     headers: {
       "Content-Type": "application/json",
     },

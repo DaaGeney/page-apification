@@ -22,6 +22,12 @@ export default function Riesgo() {
       });
   }, []);
 
+  const onAddRisk = (newElement: object) => {
+    let elements = [...risks];
+    elements.push(newElement);
+    setRisks(elements);
+  };
+
   const handleSnackStatus = () => setOpenSnack(true);
 
   const onChangeTypeSnack = (e: string) => setTypeSnack(e);
@@ -41,6 +47,7 @@ export default function Riesgo() {
         activeAlert={handleSnackStatus}
         messageAlert={(e: any) => setSnackMessage(e)}
         typeSnack={onChangeTypeSnack}
+        addRisk={onAddRisk}
       ></Form>
       <Alert
         open={openSnack}

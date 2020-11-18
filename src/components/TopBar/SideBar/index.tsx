@@ -21,19 +21,19 @@ const SideBar = (props: any) => {
 
   const routes = [
     {
+      name: "Riesgos",
+      icon: <FormatListBulletedIcon />,
+      to: "/",
+    },
+    {
       name: "Pérdida esperada",
       icon: <Money />,
       to: "/expectedLost",
     },
     {
-      name: "Qualitative Risk",
+      name: "Riesgo de crédito",
       icon: <AttachMoney />,
       to: "/QualitativeRisk",
-    },
-    {
-      name: "Riesgos",
-      icon: <FormatListBulletedIcon />,
-      to: "/risks",
     },
   ];
 

@@ -1,13 +1,12 @@
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
-import { Public, Assessment } from "@material-ui/icons";
+import { Public } from "@material-ui/icons";
 import IconButton from "@material-ui/core/IconButton";
-import React, { useState } from "react";
+import React from "react";
 import Typography from "@material-ui/core/Typography";
 import { CustomCard } from "./styles";
 import Map from "./../Map";
-import Report from "./../Report"
 
 type MediaCardProps = {
   body: any;
@@ -15,15 +14,10 @@ type MediaCardProps = {
 
 const MediaCard = ({ body }: MediaCardProps) => {
   const [openMap, setOpenMap] = React.useState(false);
-  const [openReport, setOpenReport] = React.useState(false);
 
   const onOpenMap = () => setOpenMap(true)
 
   const onCloseMap = () => setOpenMap(false)
-  
-  const onOpenReport = () => setOpenReport(true)
-
-  const onCloseReport = () => setOpenReport(false)
 
   return (
     <>
@@ -31,7 +25,7 @@ const MediaCard = ({ body }: MediaCardProps) => {
         <CardActionArea>
           <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
-              {body.id}
+              {body.name}
             </Typography>
           </CardContent>
         </CardActionArea>
@@ -39,13 +33,9 @@ const MediaCard = ({ body }: MediaCardProps) => {
           <IconButton size="small" color="primary" onClick={onOpenMap}>
             <Public />
           </IconButton>
-          <IconButton size="small" color="primary" onClick={onOpenReport}>
-            <Assessment />
-          </IconButton>
         </CardActions>
       </CustomCard>
-      <Map open={openMap} onClose={onCloseMap} id={body.id}/>
-      <Report open={openReport} onClose={onCloseReport} id={body.id}/>
+      <Map open={openMap} onClose={onCloseMap} id={body.name}/>
     </>
   );
 };

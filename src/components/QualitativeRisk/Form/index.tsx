@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Dialog from "@material-ui/core/Dialog";
@@ -9,14 +9,15 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import { CustomForm } from "./styles";
 import { useForm } from "react-hook-form";
 import { registerRisk } from "../../../api/riesgoCredito";
+import { getToken } from "../../../utils/helpers";
 
 type Inputs = {
-  impacto?: string;
-  probabilidad?: string;
-  EAD?: string;
-  PD?: string;
-  LGD?: string;
-  id?: string;
+  impacto: string;
+  probabilidad: string;
+  EAD: string;
+  PD: string;
+  LGD: string;
+  name: string;
 };
 
 export default function FormDialog(props: any) {
@@ -24,24 +25,35 @@ export default function FormDialog(props: any) {
 
   const onSave = (data: Inputs) => {
     registerRisk(
-      data.id,
-      data.PD,
-      data.LGD,
-      data.EAD,
-      data.probabilidad,
-      data.impacto
+      data.name,
+      parseInt(data.PD),
+      parseInt(data.LGD),
+      parseInt(data.EAD),
+      parseInt(data.probabilidad),
+      parseInt(data.impacto),
+      getToken().user.email
     )
       .then((res) => res.json())
-      .then((result) =>  {
+      .then((result) => {
         if (result.status) {
-          props.typeSnack("success")
-          props.messageAlert(result.message)
-          props.activeAlert()
+          props.typeSnack("success");
+          props.messageAlert(result.message);
+          props.activeAlert();
+          props.addRisk({
+            name: data.name,
+            PD: parseInt(data.PD),
+            LGD: parseInt(data.LGD),
+            EAD: parseInt(data.EAD),
+            probabilidad: parseInt(data.probabilidad),
+            impacto: parseInt(data.impacto),
+            id: getToken().user.email,
+          });
           reset();
+          props.onClose()
         } else {
-          props.typeSnack("error")
-          props.messageAlert(result.message)
-          props.activeAlert()
+          props.typeSnack("error");
+          props.messageAlert(result.message);
+          props.activeAlert();
         }
       });
   };
@@ -64,10 +76,10 @@ export default function FormDialog(props: any) {
               fullWidth
               label="Nombre"
               margin="normal"
-              name="id"
-              helperText={errors.id ? "This field is required" : ""}
+              name="name"
+              helperText={errors.name ? "This field is required" : ""}
               inputRef={register({ required: true })}
-              error={Boolean(errors.id)}
+              error={Boolean(errors.name)}
               type="text"
               variant="outlined"
             />
@@ -109,19 +121,43 @@ export default function FormDialog(props: any) {
               label="Probabilidad"
               margin="normal"
               name="probabilidad"
-              helperText={errors.probabilidad ? "This field is required" : ""}
-              inputRef={register({ required: true })}
+              helperText={
+                errors.probabilidad
+                  ? errors.probabilidad.message
+                    ? errors.probabilidad.message
+                    : "This field is required"
+                  : ""
+              }
               error={Boolean(errors.probabilidad)}
               type="number"
               variant="outlined"
+              inputRef={register({
+                required: true,
+                pattern: {
+                  value: /^[3,5,9]$/i,
+                  message: "Debes ingresar 3, 5 ó 9",
+                },
+              })}
             />
             <TextField
               fullWidth
               label="Impacto"
               margin="normal"
               name="impacto"
-              helperText={errors.impacto ? "This field is required" : ""}
-              inputRef={register({ required: true })}
+              helperText={
+                errors.impacto
+                  ? errors.impacto.message
+                    ? errors.impacto.message
+                    : "This field is required"
+                  : ""
+              }
+              inputRef={register({
+                required: true,
+                pattern: {
+                  value: /^[4,6,8]$/i,
+                  message: "Debes ingresar 4, 6 ó 8",
+                },
+              })}
               error={Boolean(errors.impacto)}
               type="number"
               variant="outlined"

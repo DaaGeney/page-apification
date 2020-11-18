@@ -33,7 +33,7 @@ export default function Map(props: any) {
             </DialogContentText>
             <TextField
               fullWidth
-              label="mapa"
+              label="Mapa"
               margin="normal"
               name="mapa"
               value={map}
