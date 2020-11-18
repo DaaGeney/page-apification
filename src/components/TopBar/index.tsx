@@ -1,5 +1,5 @@
 import AccountCircle from "@material-ui/icons/AccountCircle";
-import AppBar from "@material-ui/core/AppBar";
+import { CustomAppBar } from "./styles";
 import IconButton from "@material-ui/core/IconButton";
 import Menu from "@material-ui/core/Menu";
 import MenuIcon from "@material-ui/icons/Menu";
@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const MenuAppBar = (props: any) => {
+const MenuCustomAppBar = (props: any) => {
   const classes = useStyles();
   const [auth, setAuth] = useState(false);
   const [sidebar, setSidebar] = useState(false);
@@ -56,7 +56,7 @@ const MenuAppBar = (props: any) => {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <CustomAppBar position="static">
         <Toolbar>
           {auth && (
             <IconButton
@@ -70,13 +70,13 @@ const MenuAppBar = (props: any) => {
             </IconButton>
           )}
           <Typography variant="h6" className={classes.title}>
-            Measure your risks
+            RiskCred
           </Typography>
           {auth && (
             <>
               <IconButton
                 aria-label="account of current user"
-                aria-controls="menu-appbar"
+                aria-controls="menu-CustomAppBar"
                 aria-haspopup="true"
                 onClick={handleMenu}
                 color="inherit"
@@ -84,7 +84,7 @@ const MenuAppBar = (props: any) => {
                 <AccountCircle />
               </IconButton>
               <Menu
-                id="menu-appbar"
+                id="menu-CustomAppBar"
                 anchorEl={anchorEl}
                 anchorOrigin={{
                   vertical: "top",
@@ -109,9 +109,9 @@ const MenuAppBar = (props: any) => {
           )}
           {!auth && <CustomButton onClick={onLogin}>LogIn</CustomButton>}
         </Toolbar>
-      </AppBar>
+      </CustomAppBar>
     </div>
   );
 };
 
-export default MenuAppBar;
+export default MenuCustomAppBar;

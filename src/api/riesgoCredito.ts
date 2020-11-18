@@ -8,8 +8,6 @@ export const registerRisk = (
     probabilidad?: string,
     impacto?: string
 ) => {
-  console.log(id,"id");
-  
   const jsonRegister = {
     method: "POST",
     body: JSON.stringify({ PD, EAD, LGD, probabilidad, impacto }),

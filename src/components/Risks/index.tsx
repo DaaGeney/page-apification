@@ -89,7 +89,7 @@ const Risks = () => {
           />
         ))
       ) : (
-        <p>No hay riesgos disponibles.</p>
+        <h2>No hay riesgos disponibles.</h2>
       )}
       <Dialog
         edit={edit}
