@@ -1,4 +1,5 @@
 import { url } from "../utils/global";
+import { getToken } from "../utils/helpers";
 
 export const registerRisk = (
     name?:string,
@@ -15,6 +16,7 @@ export const registerRisk = (
     body: JSON.stringify({name, PD, EAD, LGD, probabilidad, impacto }),
     headers: {
       "Content-Type": "application/json",
+      authorization: getToken().token,
     },
   };
   return fetch(`${url}/riesgoCredito/${id}`, jsonRegister);
@@ -27,6 +29,7 @@ const jsonRegister = {
   method: "GET",
   headers: {
     "Content-Type": "application/json",
+    authorization: getToken().token,
   },
 };
 return fetch(`${url}/riesgoCredito/${id}/mapa`, jsonRegister);
@@ -37,6 +40,7 @@ export const getAllRisks = () => {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
+      authorization: getToken().token,
     },
   };
   return fetch(`${url}/riesgosCredito`, jsonGetAllRisks);
@@ -49,6 +53,7 @@ const jsonRegister = {
   method: "GET",
   headers: {
     "Content-Type": "application/json",
+    authorization: getToken().token,
   },
 };
 return fetch(`${url}/perdidaEsperada/${id}/reporte`, jsonRegister);

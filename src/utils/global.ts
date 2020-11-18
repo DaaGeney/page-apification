@@ -1,1 +1,1 @@
-export let url: string = "http://localhost:5000";
+export let url: string = "https://grupo2-faktor-risk.herokuapp.com";

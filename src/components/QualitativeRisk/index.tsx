@@ -1,24 +1,29 @@
-import React from "react";
-import Form from "./Form";
 import Alert from "../Alert";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import Form from "./Form";
+import MediaCard from "./Card";
+import React, { useState } from "react";
 import { CustomGrid, CustomButton } from "./styles";
 import { getAllRisks } from "./../../api/riesgoCredito";
-import MediaCard from "./Card";
+import { checkUserExistance } from "../../utils/helpers";
 
-export default function Riesgo() {
-  const [open, setOpen] = React.useState(false);
-  const [openSnack, setOpenSnack] = React.useState(false);
-  const [risks, setRisks] = React.useState<Array<any>>([]);
-  const [snackMessage, setSnackMessage] = React.useState("");
-  const [typeSnack, setTypeSnack] = React.useState("");
+export default function Riesgo(props: any) {
+  const [loaded, setLoaded] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [openSnack, setOpenSnack] = useState(false);
+  const [risks, setRisks] = useState<Array<any>>([]);
+  const [snackMessage, setSnackMessage] = useState("");
+  const [typeSnack, setTypeSnack] = useState("");
 
   React.useEffect(() => {
     getAllRisks()
       .then((res) => res.json())
       .then((result) => {
+        checkUserExistance(result.message, props);
         if (result.status) {
           setRisks(result.data);
         }
+        setLoaded(true);
       });
   }, []);
 
@@ -41,27 +46,35 @@ export default function Riesgo() {
 
   return (
     <CustomGrid width="100%" height="85%">
-      <Form
-        onClose={() => setOpen(false)}
-        open={open}
-        activeAlert={handleSnackStatus}
-        messageAlert={(e: any) => setSnackMessage(e)}
-        typeSnack={onChangeTypeSnack}
-        addRisk={onAddRisk}
-      ></Form>
-      <Alert
-        open={openSnack}
-        handleClick={handleSnackStatus}
-        handleClose={handleClose}
-        type={typeSnack}
-      >
-        {snackMessage}
-      </Alert>
-      <CustomButton onClick={() => setOpen(true)}>CREAR RIESGO</CustomButton>
-      {risks.length > 0 ? (
-        risks.map((e) => <MediaCard body={e} key={e._id} />)
+      {loaded ? (
+        <>
+          <Form
+            onClose={() => setOpen(false)}
+            open={open}
+            activeAlert={handleSnackStatus}
+            messageAlert={(e: any) => setSnackMessage(e)}
+            typeSnack={onChangeTypeSnack}
+            addRisk={onAddRisk}
+          ></Form>
+          <Alert
+            open={openSnack}
+            handleClick={handleSnackStatus}
+            handleClose={handleClose}
+            type={typeSnack}
+          >
+            {snackMessage}
+          </Alert>
+          <CustomButton onClick={() => setOpen(true)}>
+            CREAR RIESGO
+          </CustomButton>
+          {risks.length > 0 ? (
+            risks.map((e) => <MediaCard body={e} key={e._id} />)
+          ) : (
+            <p>No hay riesgos disponibles.</p>
+          )}
+        </>
       ) : (
-        <p>No hay riesgos disponibles.</p>
+        <CircularProgress />
       )}
     </CustomGrid>
   );

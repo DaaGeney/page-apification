@@ -11,6 +11,7 @@ export const CustomGrid = styled.div<{
   background-color: ${(props) => props.color};
   display: grid;
   grid-gap: 10px;
+  padding-top: 5%;
   grid-template-columns: auto;
   height: ${(props) => props.height};
   width: ${(props) => props.width};
@@ -19,7 +20,7 @@ export const CustomGrid = styled.div<{
 
 export const CustomButton = styled(Button)`
   && {
-    grid-column:1;
+    grid-column: 1;
     width: fit-content;
     color: white;
     background-color: #3f51b5;

@@ -35,7 +35,7 @@ const LogIn = (props: any) => {
       .then((result) => {
         if (result.status) {
           localStorage.setItem(
-            "userInfoSotware",
+            "userInfoSoftware",
             JSON.stringify({
               user: result.data,
               token: result.token,

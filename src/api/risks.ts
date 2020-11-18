@@ -1,4 +1,5 @@
 import { url } from "../utils/global";
+import { getToken } from "../utils/helpers";
 
 export const createRisk = (body: object) => {
   const jsonCreateRisk = {
@@ -6,19 +7,21 @@ export const createRisk = (body: object) => {
     body: JSON.stringify(body),
     headers: {
       "Content-Type": "application/json",
+      authorization: getToken().token,
     },
   };
   return fetch(`${url}/riesgos`, jsonCreateRisk);
 };
 
-export const getAllRisks = () => {
+export const getAllRisks = (id: string) => {
   const jsonGetAllRisks = {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
+      authorization: getToken().token,
     },
   };
-  return fetch(`${url}/riesgos`, jsonGetAllRisks);
+  return fetch(`${url}/riesgos/${id}`, jsonGetAllRisks);
 };
 
 export const deleteRisk = (id: string) => {
@@ -26,6 +29,7 @@ export const deleteRisk = (id: string) => {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
+      authorization: getToken().token,
     },
   };
   return fetch(`${url}/riesgos/${id}`, jsonDeleteRisk);
@@ -37,6 +41,7 @@ export const editRisk = (body: object, id: string) => {
     body: JSON.stringify(body),
     headers: {
       "Content-Type": "application/json",
+      authorization: getToken().token,
     },
   };
   return fetch(`${url}/riesgos/${id}`, jsonEditRisk);

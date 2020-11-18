@@ -8,7 +8,7 @@ import React, { useState, useEffect } from "react";
 import SideBar from "./SideBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import { CustomButton } from "./styles";
+import { CustomButton, CustomIconButton } from "./styles";
 import { getToken } from "../../utils/helpers";
 
 const MenuAppBar = (props: any) => {
@@ -31,7 +31,7 @@ const MenuAppBar = (props: any) => {
 
   const handleClose = () => {
     setAnchorEl(null);
-    localStorage.removeItem("userInfoSotware");
+    localStorage.removeItem("userInfoSoftware");
     setAuth(false);
     onLogin()
   };
@@ -54,7 +54,7 @@ const MenuAppBar = (props: any) => {
         <Typography variant="h6"> RiskCred</Typography>
         {auth && (
           <>
-            <IconButton
+            <CustomIconButton
               aria-label="account of current user"
               aria-controls="menu-CustomAppBar"
               aria-haspopup="true"
@@ -62,7 +62,7 @@ const MenuAppBar = (props: any) => {
               color="inherit"
             >
               <AccountCircle />
-            </IconButton>
+            </CustomIconButton>
             <Menu
               id="menu-CustomAppBar"
               anchorEl={anchorEl}

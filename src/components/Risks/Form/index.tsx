@@ -10,6 +10,7 @@ import TextField from "@material-ui/core/TextField";
 import { CustomForm } from "./styles";
 import { createRisk, editRisk } from "../../../api/risks";
 import { useForm } from "react-hook-form";
+import { getToken } from "../../../utils/helpers";
 
 type Inputs = {
   name?: string;
@@ -27,6 +28,7 @@ export default function FormDialog(props: any) {
 
   const onSave = (data: Inputs) => {
     const body = {
+      company: getToken().user.email,
       name: data.name,
       description: data.description,
       subRiesgos: [
