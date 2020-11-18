@@ -38,10 +38,17 @@ const ExpectedLost = () => {
 
   return (
     <RiskContainer>
-      {Boolean(listExpected.length) &&
+      {listExpected.length > 0 ? (
         listExpected.map((e) => (
-          <ExpectedLostItem body={e} onChangeValue={() => onEditElement(e)} />
-        ))}
+          <ExpectedLostItem
+            key={e.id}
+            body={e}
+            onChangeValue={() => onEditElement(e)}
+          />
+        ))
+      ) : (
+        <h2>No hay registro que mostrar :(</h2>
+      )}
       {Boolean(Object.keys(currentElement).length) && (
         <Dialog
           onChangeExpected={onChangeExpected}

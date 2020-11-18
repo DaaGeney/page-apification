@@ -1,5 +1,12 @@
 import styled from "styled-components";
 import Button from "@material-ui/core/Button";
+import AppBar from "@material-ui/core/AppBar";
+
+export const CustomAppBar = styled(AppBar)`
+  && {
+    border-radius: 30px;
+  }
+`;
 
 export const CustomButton = styled(Button)`
   && {
@@ -7,7 +14,7 @@ export const CustomButton = styled(Button)`
   }
 `;
 
-export const CustomForm = styled.div<{
+export const CustomDiv = styled.div<{
 }>`
-  flex-grow: 1,
+  width: 300px,
 `;

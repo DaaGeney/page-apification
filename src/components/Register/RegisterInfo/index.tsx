@@ -9,9 +9,15 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 type RiskDescriptionProps = {
   body: {
     _id: string;
-    description: string;
+    id: string;
+    EAD: number;
+    LGD: number;
+    PD: number;
+    impacto: number;
     name: string;
-    subRiesgos: Array<any>;
+    otros: string;
+    probabilidad: string;
+    registro: string;
   };
   onClose: any;
   open: boolean;
@@ -24,11 +30,15 @@ const RiskDescription = ({ body, open, onClose }: RiskDescriptionProps) => {
         {body.name}
       </DialogTitle>
       <DialogContent>
-        <DialogContentText>Descripción: {body.description}</DialogContentText>
-        <DialogContentText>Sub riesgos:</DialogContentText>
-        {body.subRiesgos.map((e, i) => (
-          <DialogContentText key={i}>- {e.name}</DialogContentText>
-        ))}
+        {Object.entries(body).map(
+          ([key, value]) =>
+            !key.includes("id") &&
+            key !== "name" && (
+              <DialogContentText key={`${key}-${value}`}>
+                {key.toUpperCase()}: {value ? value : "Sin información"}
+              </DialogContentText>
+            )
+        )}
         <DialogActions>
           <Button onClick={onClose} color="primary">
             Salir

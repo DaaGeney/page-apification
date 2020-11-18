@@ -41,7 +41,7 @@ const LogIn = (props: any) => {
               token: result.token,
             })
           );
-          props.history.push("/");
+          props.history.push("/risks");
           window.location.reload();
         } else {
           setSnackMessage(result.message);

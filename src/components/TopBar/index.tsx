@@ -1,5 +1,5 @@
 import AccountCircle from "@material-ui/icons/AccountCircle";
-import AppBar from "@material-ui/core/AppBar";
+import { CustomAppBar } from "./styles";
 import IconButton from "@material-ui/core/IconButton";
 import Menu from "@material-ui/core/Menu";
 import MenuIcon from "@material-ui/icons/Menu";
@@ -33,66 +33,63 @@ const MenuAppBar = (props: any) => {
     setAnchorEl(null);
     localStorage.removeItem("userInfoSotware");
     setAuth(false);
+    onLogin()
   };
 
   const onLogin = () => props.history.push("/logIn");
 
   return (
-    <div >
-      <AppBar position="static">
-        <Toolbar>
-          {auth && (
+    <CustomAppBar position="static">
+      <Toolbar>
+        {auth && (
+          <IconButton
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            onClick={() => setSidebar(true)}
+          >
+            <MenuIcon />
+          </IconButton>
+        )}
+        <Typography variant="h6"> RiskCred</Typography>
+        {auth && (
+          <>
             <IconButton
-              edge="start"
+              aria-label="account of current user"
+              aria-controls="menu-CustomAppBar"
+              aria-haspopup="true"
+              onClick={handleMenu}
               color="inherit"
-              aria-label="menu"
-              onClick={() => setSidebar(true)}
             >
-              <MenuIcon />
+              <AccountCircle />
             </IconButton>
-          )}
-          <Typography variant="h6">
-            Measure your risks
-          </Typography>
-          {auth && (
-            <>
-              <IconButton
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleMenu}
-                color="inherit"
-              >
-                <AccountCircle />
-              </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                open={open}
-                onClose={handleClose}
-              >
-                <MenuItem onClick={handleClose}>Sign out</MenuItem>
-              </Menu>
-              <SideBar
-                {...props}
-                open={sidebar}
-                onClose={() => setSidebar(false)}
-              />
-            </>
-          )}
-          {!auth && <CustomButton onClick={onLogin}>LogIn</CustomButton>}
-        </Toolbar>
-      </AppBar>
-    </div>
+            <Menu
+              id="menu-CustomAppBar"
+              anchorEl={anchorEl}
+              anchorOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              open={open}
+              onClose={handleClose}
+            >
+              <MenuItem onClick={handleClose}>Sign out</MenuItem>
+            </Menu>
+            <SideBar
+              {...props}
+              open={sidebar}
+              onClose={() => setSidebar(false)}
+            />
+          </>
+        )}
+        {!auth && <CustomButton onClick={onLogin}>LogIn</CustomButton>}
+      </Toolbar>
+    </CustomAppBar>
   );
 };
 
