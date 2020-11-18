@@ -5,8 +5,7 @@ import MuiAlert, { AlertProps } from "@material-ui/lab/Alert";
 function CtrlAlert(props: AlertProps) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
-
-export default function Alert(props: any) {
+const Alert = (props: any) => {
   return (
     <div>
       <Snackbar
@@ -20,4 +19,6 @@ export default function Alert(props: any) {
       </Snackbar>
     </div>
   );
-}
+};
+
+export default Alert;
